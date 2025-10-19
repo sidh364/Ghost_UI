@@ -1,0 +1,236 @@
+
+.add-post-page {
+  width: 100%;
+  min-height: 130vh; /* give a bit more vertical room so popovers have space */
+  padding: 20px 40px;
+  background: #ffffff;
+  box-sizing: border-box;
+  /* Use dark text color for readability across the page */
+  color: #111111;
+}
+.add-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.add-header-left { display:flex; gap:12px; align-items:center }
+.back-link { color: #6b6b6b; text-decoration: none }
+.back-link:hover, .back-link:active { text-decoration: none; color: #4f4f4f }
+.back-link:focus { outline: none; box-shadow: 0 0 0 4px rgba(14,165,233,0.06); text-decoration: none }
+.status { color: #9ca3af; font-size: 13px }
+.add-header-actions { display:flex; gap:8px }
+.btn { padding:8px 12px; border-radius:6px; border:1px solid rgba(0,0,0,0.06); background:#fff; cursor:pointer }
+.btn.preview { background: #000; color: #FFF; padding:6px 10px; text-align: center; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; font-size: 14px; font-style: normal; font-weight: 600; line-height: 24px }
+.btn.publish { background: #0f9d58; color: #FFF; padding:6px 10px; text-align: center; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; font-size: 14px; font-style: normal; font-weight: 600; line-height: 24px }
+
+.content-wrapper { max-width: 800px; margin: 0 auto; width: 100%; padding: 0 12px }
+.cover-upload { display:flex; justify-content:center; margin: 10px 0 28px 0 }
+.upload-area { display:flex; width: 100%; height: 300px; padding: 10px; gap: 16px; border:1px dashed rgba(0,0,0,0.12); background:#fff; border-radius:12px; flex-direction: column; align-items:center; justify-content:center; color:#9aa0a6; overflow: hidden }
+.upload-area { border:1px dashed rgba(0,0,0,0.12); }
+.upload-area { cursor: pointer; }
+.upload-area:focus { outline: none; box-shadow: 0 0 0 4px rgba(14,165,233,0.08); }
+.upload-icon { font-size:20px; margin-bottom:8px }
+.upload-preview { max-width: 100%; max-height: 100%; border-radius: 12px; object-fit: contain; display:block }
+
+/* when an image is present, make it larger and hide upload helpers */
+.upload-area.has-preview { height: 280px; padding: 0; border: none; overflow: hidden }
+.upload-area.has-preview .upload-text { display: none }
+.upload-area.has-preview .upload-icon { display: none }
+.upload-area.has-preview .upload-preview { width: 100%; height: 100%; border-radius: 12px; object-fit: contain }
+.upload-text { font-size:13px; text-align:center }
+
+/* remove cover button */
+.upload-area.has-preview { position: relative }
+.remove-cover-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.remove-cover-btn:hover { opacity: 0.75 }
+
+.title-input {
+  /* actual text color (not faded) */
+  color: #111;
+  /* text-4xl/bold */
+  font-family: inherit;
+  font-size: var(--font-size-4xl, 36px);
+  font-style: normal;
+  font-weight: var(--font-weight-bold, 700);
+  line-height: var(--font-leading-10, 40px);
+  letter-spacing: var(--font-tracking-normal, 0);
+  margin: 10px auto 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+}
+.title-input::placeholder { color: #bfc8cc }
+.title-input:focus { box-shadow: none }
+.title-underline { height:1px; background: rgba(0,0,0,0.08); margin: 8px auto 18px; width: 800px; max-width: 100% }
+.editor-divider { height:1px; background: rgba(0,0,0,0.08); width: 100%; margin: 8px 0 }
+.editor-placeholder { color:#9aa0a6 }
+
+.editor-placeholder-input {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  max-width: 800px; /* match title-input max-width so left edges align */
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.editor-row { display:flex; align-items:center; gap:12px; max-width: 800px; margin: 0 auto 20px; position: relative }
+.editor-col { display:flex; flex-direction: column; gap: 12px; width: 100% }
+.block-row { position: relative; display: flex; align-items: center }
+.block-row .remove-block-btn {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 120ms ease-in-out;
+}
+.block-row:hover .remove-block-btn,
+.block-row:focus-within .remove-block-btn { opacity: 1; pointer-events: auto }
+.remove-block-btn:hover { opacity: 0.75 }
+.plus-circle { width:40px; height:40px; display:flex; align-items:center; justify-content:center; border: none; cursor: pointer; border-radius: 100px; background: var(--color-gray-600, #4A5565); box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px 0 rgba(0, 0, 0, 0.06); padding: 0; position: absolute; left: -56px; top: 50%; transform: translateY(-50%); opacity: 0; transition: opacity 150ms ease-in-out; color: #000 }
+.plus-circle svg { display:block }
+.plus-circle svg path { stroke: currentColor !important }
+.plus-circle:focus { outline: none; box-shadow: 0 0 0 4px rgba(14,165,233,0.06) }
+
+
+@media (max-width: 900px) {
+  .upload-area { width: 90%; height: 240px; padding: 12px; gap: 12px; margin: 0 12px }
+  .title-input { max-width: 90% }
+  .title-underline { width: 90% }
+  .title-input { font-size: 30px; line-height: 34px }
+}
+
+@media (max-width: 600px) {
+  .upload-area { width: 100%; height: 200px; padding: 8px; gap: 8px; margin: 0 8px }
+  .add-post-page { padding: 16px }
+  .title-input { max-width: 100% }
+  .title-underline { width: 100% }
+  .title-input { font-size: 24px; line-height: 28px }
+  /* On small screens the plus button should flow inline instead of sitting outside */
+  .plus-circle { position: static; transform: none; margin-right: 8px }
+  .editor-row { align-items: center }
+  .block-row .remove-block-btn { position: static; transform: none; right: auto; top: auto; margin-left: 8px; opacity: 1; pointer-events: auto }
+}
+
+/* youtube overlay remove button */
+.youtube-wrapper { position: relative }
+.youtube-remove-btn {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background: transparent;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+.youtube-remove-btn:hover { opacity: 0.75 }
+
+/* show plus when hovering/focusing the editor row (desktop) */
+.editor-row:hover .plus-circle,
+.editor-row:focus-within .plus-circle {
+  opacity: 1;
+}
+
+/* also show when hovering the button itself (so it can be revealed by hovering the area) */
+.plus-circle:hover {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Insert menu popover */
+.insert-menu {
+  /* style */
+  border-radius: var(--radius, 8px);
+  border: 1px solid var(--border, rgba(0,0,0,0.06));
+  background: var(--popover, #fff);
+  /* subtler, longer shadow for a more refined look */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  /* layout */
+  display: flex;
+  width: 180px; /* slightly narrower */
+  min-width: 128px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4px 0; /* compact vertical padding */
+
+  /* height constraint so the menu never overflows the viewport */
+  max-height: 220px;
+
+  /* positioning */
+  position: absolute;
+  /* Anchor the menu inside the editor row so it never overflows off the page to the left */
+  left: 0;                    /* start at the editor content's left edge */
+  top: calc(50% + 28px);      /* below the plus (plus is centered at 50%) */
+  z-index: 30;
+}
+.insert-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px; /* compact item padding */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #111;
+  font: inherit;
+  font-size: 13px; /* slightly smaller text for a sleeker feel */
+  text-align: left;
+}
+.insert-item:hover { background: #f3f4f6 }
+.insert-separator { height: 1px; margin: 4px 0; background: rgba(0,0,0,0.08) }
+.insert-menu .icon { width: 20px; height: 20px; display: inline-flex; justify-content: center; align-items: center; flex: 0 0 20px }
+.insert-menu .icon svg { width: 16px; height: 16px }
+
+/* responsive - ensure popover stays usable on smaller screens */
+@media (max-width: 900px) {
+  .insert-menu { left: 0; top: calc(50% + 24px); width: 180px }
+}
+@media (max-width: 600px) {
+  /* Stack below the editor row when very narrow */
+  .editor-row { flex-wrap: wrap }
+  .insert-menu { position: static; transform: none; width: 100%; min-width: 0; margin-top: 8px }
+}
